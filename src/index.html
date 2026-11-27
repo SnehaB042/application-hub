@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src https: http:; child-src https: http:">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Application Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <div class="app">
+    <aside class="sidebar glass">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">✦</div>
+        <div><div class="brand-name">Application Hub</div><div class="brand-sub">Your admissions sky</div></div>
+      </div>
+      <nav class="nav" id="nav">
+        <button data-view="dashboard" class="active"><span>📊</span>Dashboard</button>
+        <button data-view="universities"><span>🎓</span>Universities</button>
+        <button data-view="credentials"><span>🔐</span>Portal logins</button>
+        <button data-view="documents"><span>📄</span>Documents</button>
+        <button data-view="workspace"><span>🌐</span>Workspace</button>
+      </nav>
+      <div class="gbox">
+        <div class="g-line"><span class="dot" id="gDot"></span><span id="gLabel">Google</span></div>
+        <button class="btn ghost small" id="gBtn" data-act="google-btn">Sign in</button>
+      </div>
+      <div class="side-foot">
+        <div class="foot-title">Backup</div>
+        <button class="btn ghost small" data-act="export-json">Export JSON</button>
+        <button class="btn ghost small" data-act="export-csv">Export CSV</button>
+        <button class="btn ghost small" data-act="import">Import backup</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <div id="view" class="view"></div>
+
+      <section id="workspace" class="workspace" hidden>
+        <div class="ws-tabs glass">
+          <div id="tabs" class="tabs"></div>
+          <button class="icon-btn" data-act="tab-new" title="New tab">＋</button>
+        </div>
+        <div class="ws-nav glass">
+          <button class="icon-btn" data-act="nav-back" title="Back">◀</button>
+          <button class="icon-btn" data-act="nav-forward" title="Forward">▶</button>
+          <button class="icon-btn" data-act="nav-reload" title="Refresh">⟳</button>
+          <input id="urlBar" type="text" placeholder="Type a URL or search" spellcheck="false" autocomplete="off">
+          <select id="quickOpen" title="Open a saved link"></select>
+          <button class="btn small" data-act="autofill-active" title="Fill the saved login into this page">Auto-fill login</button>
+          <button class="btn small ghost" data-act="nav-external" title="Open this page in your default browser">Open in browser</button>
+          <button class="btn small ghost" id="splitBtn" data-act="split-toggle">Split view</button>
+        </div>
+        <div class="ws-body">
+          <aside id="splitPane" class="split-pane glass" hidden></aside>
+          <div class="webviews glass" id="webviews">
+            <div id="wsEmpty" class="ws-empty">
+              <h2>Work on your applications without leaving the app</h2>
+              <p>Sign in to Google once from the sidebar. Every Doc and Sheet you open here uses that account, and it stays signed in between sessions.</p>
+              <div class="actions">
+                <button class="btn primary" data-open="https://docs.google.com/document/u/0/">Google Docs</button>
+                <button class="btn" data-open="https://docs.google.com/spreadsheets/u/0/">Google Sheets</button>
+                <button class="btn" data-open="https://drive.google.com/">Google Drive</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modalRoot"></div>
+  <div id="toasts" aria-live="polite"></div>
+
+  <script src="canvas-bg.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
